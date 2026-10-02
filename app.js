@@ -4,6 +4,15 @@ const ctx = canvas.getContext('2d');
 const angleInput = document.getElementById('angle');
 const valAngle = document.getElementById('val-angle');
 
+const velocityInput = document.getElementById('velocity');
+const valVelocity = document.getElementById('val-velocity');
+
+const gravityInput = document.getElementById('gravity');
+const valGravity = document.getElementById('val-gravity');
+
+const heightInput = document.getElementById('height');
+const valHeight = document.getElementById('val-height');
+
 function setCanvasSize() {
     canvas.width = canvas.parentElement.clientWidth;
     canvas.height = canvas.parentElement.clientHeight;
@@ -42,7 +51,7 @@ function drawScene() {
     ctx.lineTo(canvas.width, groundY);
     ctx.stroke();
 
-    const launchX = 80;
+    const launchX = 80; 
     const launchY = groundY;
 
     ctx.fillStyle = '#38bdf8';
@@ -65,10 +74,18 @@ function drawScene() {
     ctx.stroke();
 }
 
-angleInput.addEventListener('input', () => {
+function updateUI() {
+    valVelocity.textContent = `${velocityInput.value}m/s`;
     valAngle.textContent = `${angleInput.value}°`;
+    valGravity.textContent = `${gravityInput.value}m/s²`;
+    valHeight.textContent = `${heightInput.value} m`;
     drawScene();
-});
+
+}
+
+velocityInput.addEventListener('input', updateUI);
+angleInput.addEventListener('input', updateUI);
+gravityInput.addEventListener('input',updateUI);
+heightInput.addEventListener('input',updateUI);
 
 drawScene();
-
