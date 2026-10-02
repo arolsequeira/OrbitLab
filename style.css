@@ -1,19 +1,15 @@
 :root {
-  --bg-deep: #090d16;
-  --bg-surface: #1a1f2e;
-  --bg-surface-elevated: #1f2937;
-  --border-subtle: #374151;
-  --border-active: #60a5fa;
+  --blueprint-dark: #0a1120;
+  --blueprint-surface: #0f1c30;
+  --blueprint-grid: #1e3352;
+  --blueprint-border: #2a456e;
 
-  --text-main: #f9Fafb;
-  --text-muted: #9ca3af;
+  --ink-primary: #f0f6fc;
+  --ink-muted:#8ba2c4;
+  --ink-cyan: #38bdf8;
+  --ink-amber: #f59e0b;
 
-  --accent-cyan: #38bdf8;
-  --accent-green: #10b981;
-  --accent-red: #ef4444;
-
-  --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "SF Mono", "JetBrains Mono", Consolas, "Courier New", monospace;
+  --font-mono: "Consolas", "Courier New", monospace;
 }
 
 *, *::before, *::after {
@@ -23,127 +19,130 @@
 }
 
 body {
-  background-color: var(--bg-deep);
-  color: var(--text-main);
-  font-family: var(--font-ui);
+  background-color: var(--blueprint-dark);
+  color: var(--ink-primary);
+  font-family: var(--font-mono);
   height:100vh;
   width: 100vw;
   overflow: hidden;
-  -webkit-font-smoothing: antialiased;
 }
 
 .app-container {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 320px 1fr;
   height: 100vh;
   width: 100vw;
 }
 
 .sidebar {
-  background-color: var(--bg-surface);
-  border-right: 1px solid var(--border-subtle);
-  padding: 24px;
+  background-color: var(--blueprint-surface);
+  border-right: 1px solid var(--blueprint-border);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   overflow-y: auto;
-  box-shadow: 4px 0 24px rgba(0,0,0,0.4);
-  z-index: 10; 
+  box-shadow: 4px 0 16px rgba(0,0,0,0.5);
+}
+
+.sidebar-header {
+  border-bottom: 2px solid var(--blueprint-border);
+  padding-bottom: 12px;
 }
 
 .sidebar-header h1 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--accent-cyan);
+  letter-spacing: 0.15em;
+  color: var(--ink-cyan);
   text-transform: uppercase;
 }
 
 .tagline {
-  font-size: 0.75rem;
-  letter-spacing:0.1em;
+  font-size: 0.68em;
+  letter-spacing:0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--ink-muted);
   margin-top: 4px;
 }
 
 .control-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .control-group label {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
-  font-weight:500;
-  color: var(--text-main);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
 }
 
 .control-group label span {
-  font-family: var(--font-mono);
-  color: var(--accent-cyan);
-  font-weight: 700;
+  color: var(--ink-cyan);
+  font-weight: bold
 }
 
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 6px;
-  background: var(--bg-surface-elevated);
-  border-radius: 999px;
+  height: 4px;
+  background: var(--blueprint-grid);
+  border-radius: 0;
   outline: none;
   cursor: pointer;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--blueprint-border);
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 10px rgba(56,189,248,0.5);
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease;
+  width: 12px;
+  height: 18px;
+  border-radius: 0;
+  background: var(--ink-cyan);
+  border: 1px solid #ffffff;
+  cursor: ew-resize;
+  transition: background 0.1s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.25);
   background: #ffffff;
 }
 
 .action-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 6px;
+  gap: 10px;
+  margin-top: 4px;
 }
 
 .btn {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid transparent;
+  padding: 10px 12px;
+  border-radius: 0;
+  border: 1px solid var(--blueprint-border);
+  font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .btn.primary {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  background-color: var(--ink-amber);
+  border-color:#fcd34d;
+  color: #000000;
 }
 
 .btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16,185,129,0.5);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
 }
 
 .btn.primary:active {
@@ -151,12 +150,70 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .btn.secondary {
-  background-color: var(--bg-surface-elevated);
-  border-color: var(--border-subtle);
-  color: var(--text-main);
+  background-color: transparent;
+  border-color: var(--blueprint-border);
+  color: var(--ink-muted);
 }
 
 .btn.secondary:hover {
-  background-color: #374151;
-  border-color: var(--border-muted);
+  background-color: var(--ink-primary);
+  color: var(--ink-primary);
+  background-color: rgba(255,255,255,0.05);
+}
+
+/*telemetry part!!, readoutcode below*/
+
+.telemetry {
+  margin-top: auto;
+  background-color: rgba(10,17,32,0.8);
+  border: 1px solid var(--blueprint-border);
+  border-radius: 0;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.telemetry h2 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom: 1px dashed var(--blueprint-border);
+  padding-bottom: 6px;
+}
+
+.metric {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-size: 0.75rem;
+}
+
+.metric .label {
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.metric .value {
+  color: var(--ink-cyan);
+  font-weight: 700;
+  border: 1px solid var(--blueprint-grid);
+  padding: 2px 6px;
+  background-color: #050a12;
+}
+
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--blueprint-dark);
+}
+
+#sim-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
