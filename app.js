@@ -29,3 +29,18 @@ ctx.beginPath();
 ctx.moveTo(0, groundY);
 ctx.lineTo(canvas.width, groundY);
 ctx.stroke();
+
+const launchX = 80;
+const launchY = groundY;
+
+ctx.fillStyle = '#38bdf8';
+ctx.beginPath();
+ctx.arc(launchX, launchY, 6, 0, Math.PI * 2);
+ctx.fill();
+
+ctx.strokeStyle = '#ffffff';
+ctx.lineWidth = 3;
+ctx.beginPath();
+ctx.moveTo(launchX, launchY);
+ctx.lineTo( launchX + 25, launchY - 25);
+ctx.stroke();
