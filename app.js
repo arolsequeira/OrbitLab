@@ -1,46 +1,74 @@
 const canvas = document.getElementById('sim-canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = canvas.parentElement.clientWidth;
-canvas.height = canvas.parentElement.clientHeight;
+const angleInput = document.getElementById('angle');
+const valAngle = document.getElementById('val-angle');
+
+function setCanvasSize() {
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
+}
+setCanvasSize();
+
+window.addEventListener('resize', () => {
+    setCanvasSize();
+    drawScene();
+});
+
 
 const gridSize = 25;
+const barrelLength = 30;
 
-ctx.strokeStyle = '#162842';
-ctx.lineWidth = 1;
-ctx.beginPath();
+function drawScene() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#162842';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let x=0; x <= canvas.width; x += gridSize) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+    }
+    for(let y= 0; y <= canvas.height; y += gridSize) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+    }
+    ctx.stroke();
+    
+    const groundY = canvas.height -60;
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, groundY);
+    ctx.lineTo(canvas.width, groundY);
+    ctx.stroke();
 
-for (let x=0; x <= canvas.width; x += gridSize) {
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, canvas.height);
+    const launchX = 80;
+    const launchY = groundY;
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath();
+    ctx.arc(launchX, launchY, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    const angleDeg = parseFloat(angleInput.value);
+    const angleRad = (angleDeg * Math.PI) / 180;
+
+    const barrelEndX = launchX + barrelLength * Math.cos(angleRad);
+    const barrelEndY = launchY - barrelLength * Math.sin(angleRad);
+
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(launchX, launchY);
+    ctx.lineTo(barrelEndX, barrelEndY);
+    ctx.stroke();
 }
 
-for (let y = 0; y <= canvas.height; y +=gridSize) {
-    ctx.moveTo(0,y);
-    ctx.lineTo(canvas.width, y);
-}
-ctx.stroke();
+angleInput.addEventListener('input', () => {
+    valAngle.textContent = `${angleInput.value}°`;
+    drawScene();
+});
 
-const groundY = canvas.height - 60;
+drawScene();
 
-ctx.strokeStyle = '#38bdf8';
-ctx.lineWidth = 2;
-ctx.beginPath();
-ctx.moveTo(0, groundY);
-ctx.lineTo(canvas.width, groundY);
-ctx.stroke();
-
-const launchX = 80;
-const launchY = groundY;
-
-ctx.fillStyle = '#38bdf8';
-ctx.beginPath();
-ctx.arc(launchX, launchY, 6, 0, Math.PI * 2);
-ctx.fill();
-
-ctx.strokeStyle = '#ffffff';
-ctx.lineWidth = 3;
-ctx.beginPath();
-ctx.moveTo(launchX, launchY);
-ctx.lineTo( launchX + 25, launchY - 25);
-ctx.stroke();
